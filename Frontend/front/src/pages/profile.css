@@ -1,0 +1,65 @@
+.profile-wrapper 
+{
+  margin: 20px;
+  margin-top: 40px; 
+
+}
+  
+.profile-title 
+{
+  margin-bottom: 20px;
+  margin-top: 0;
+  color: #ffffff;
+}
+  
+.form-group
+{
+  margin-bottom: 20px; 
+  padding-left: 300;
+}
+  
+.form-control
+ {
+  font-size: 14px; 
+  padding: 10px; 
+    
+}
+  
+.text-right 
+{
+  margin-top: 20px;
+}
+  
+.dropdownmenu
+{
+  font-size: 12px; 
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px; 
+}
+
+.dropdownmenu .btn-primary
+{
+  background-color: rgba(2, 31, 43);
+  border-color: rgba(2, 31, 43); 
+  color: #ffffff;
+}
+  
+.text-right 
+{
+  margin-left: 32%;
+}
+
+.text-right .btn-primary 
+{
+  margin-right: 10px; 
+}
+.mb-3{
+    color: #ffffff;
+}
+.mr-4{
+  border: none;
+}
+

@@ -1,0 +1,52 @@
+body {
+    background-color: rgb(2, 31, 43);
+}
+
+.container-xl {
+    width: 80%;
+    margin-left: 150px;
+    margin-top: 50px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(54, 54, 54);
+}
+
+.table {
+    padding: 20px;
+    padding-top: 100px;
+    border-radius: 20px;
+    background-color: rgb(180, 180, 180); /* Set the background color for the table */
+}
+
+h1 {
+    color: white;
+}
+
+.thead {
+    color: white; /* Set the text color for table headers */
+    text-align: center;
+}
+
+
+
+  
+.btn{
+    background-color: rgb(174, 174, 174);
+    width: 100px;
+    margin: 3px;
+    align-items: center;
+    font-size: small;
+}
+.btn-secondary1:hover{
+    background-color: rgb(240, 77, 23);
+}
+.btn-secondary2:hover{
+    background-color: rgb(206, 230, 28);
+}
+
+.table-group-divider{
+    text-align: center;
+}
+.btn-secondary-search:hover{
+    background-color: rgb(72, 206, 108);
+}
