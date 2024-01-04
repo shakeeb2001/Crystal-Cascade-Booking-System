@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
 
 
 app.post('/hellow', (req, res) => {
-   res.json('hellow world')
+   res.json('hellow')
 });
 
 
