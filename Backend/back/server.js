@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
 
 
 app.post('/hellow', (req, res) => {
-   res.json('hellow')
+   res.json('hello')
 });
 
 
