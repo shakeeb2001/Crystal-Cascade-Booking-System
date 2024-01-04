@@ -32,6 +32,11 @@ io.on('connection', (socket) => {
 });
 
 
+app.post('/hellow', (req, res) => {
+   res.json('hellow world')
+});
+
+
 app.post('/signup', (req, res) => {
     SignupModel.create(req.body)
         .then(newUser => res.json(newUser))
