@@ -9,13 +9,16 @@ const EventModel = require('../back/models/eventcardmodel');
 const DiningModel = require('../back/models/diningcardmodel');
 const BookingModel = require('../back/models/bookinghistrotymodel');
 const socketIO = require('socket.io');
+
+
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '20mb' }));
 const URI = "mongodb+srv://shakeeb:226284@mycluster.hitx68p.mongodb.net/Test2?retryWrites=true&w=majority";
 mongoose.connect(URI);
-
 const connection = mongoose.connection;
+
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const server = http.createServer(app);
