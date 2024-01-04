@@ -12,8 +12,8 @@ const socketIO = require('socket.io');
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '20mb' }));
-const uri = "mongodb://localhost:27017/crystel-cascade-hotel";
-mongoose.connect(uri);
+const URI = "mongodb+srv://shakeeb:226284@mycluster.hitx68p.mongodb.net/Test2?retryWrites=true&w=majority";
+mongoose.connect(URI);
 
 const connection = mongoose.connection;
 const storage = multer.memoryStorage();
