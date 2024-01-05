@@ -87,7 +87,7 @@ app.get('/api/signup/:username', async (req, res) => {
         res.status(404).json({ error: 'User not found' });
       }
     } catch (error) {
-      console.error('Error updating user profile:', error);
+      console.error('Error updating use profile:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
