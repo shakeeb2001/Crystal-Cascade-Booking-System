@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const http = require('http');
-const bodyParser = require('body-parser');
 const multer = require('multer');
 const socketIO = require('socket.io');
 const SignupModel = require('../back/models/signupmodel');
