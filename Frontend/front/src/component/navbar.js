@@ -21,7 +21,17 @@ function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
 
 
     socket.on('new-event-notification', (event) => {
-      setNotifications((prevNotifications) => [...prevNotifications, event]);
+      setNotifications((prevNotifications) => [
+        ...prevNotifications,
+        { type: 'event', data: event },
+      ]);
+    });
+
+    socket.on('new-dining-notification', (dining) => {
+      setNotifications((prevNotifications) => [
+        ...prevNotifications,
+        { type: 'dining', data: dining },
+      ]);
     });
 
     return () => {
@@ -102,13 +112,24 @@ function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
             </NavBootstrap.Item>
           </NavBootstrap>
           <NavBootstrap>
-            <NavDropdown className="notification-dropdown" title={<img src={notificationIcon} alt="Notification" />} id="basic-nav-dropdown">
-              {notifications.map((event, index) => (
-                <NavDropdown.Item key={index}>
-                  {event.title} - New Event <Badge variant="danger">1</Badge>
-                </NavDropdown.Item>
-              ))}
-            </NavDropdown>
+          {isLoggedIn && (
+                <NavDropdown className="notification-dropdown" title={<img src={notificationIcon} alt="Notification" />} id="basic-nav-dropdown">
+                   {notifications.length > 0 ? (
+  notifications.map((notification, index) => (
+    <NavDropdown.Item key={index}>
+      {notification.type === 'event' ? (
+        `${notification.data.title} - New Event`
+      ) : (
+        `${notification.data.title} - New Dining`
+      )}
+      <Badge variant="danger">1</Badge>
+    </NavDropdown.Item>
+  ))
+) : (
+  <NavDropdown.Item>No new notifications</NavDropdown.Item>
+)}
+                </NavDropdown>
+                )}
 
             {isLoggedIn ? (
               <NavDropdown className="profile-dropdown" title={username ? `Hi ${username}` : ''} id="basic-nav-dropdown">

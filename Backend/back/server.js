@@ -1,37 +1,36 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const http = require('http'); 
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const http = require('http');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const socketIO = require('socket.io');
 const SignupModel = require('../back/models/signupmodel');
 const EventModel = require('../back/models/eventcardmodel');
 const DiningModel = require('../back/models/diningcardmodel');
 const BookingModel = require('../back/models/bookinghistrotymodel');
-const socketIO = require('socket.io');
-
 
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '20mb' }));
+
 const URI = "mongodb+srv://shakeeb:226284@mycluster.hitx68p.mongodb.net/Cyrstal-Cascade?retryWrites=true&w=majority";
 mongoose.connect(URI);
 const connection = mongoose.connection;
 
-
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const server = http.createServer(app);
-const io = socketIO(server);
+const io = socketIO(server, { origins: "*" });
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
-    socket.on('new-event', (event) => {
-        io.emit('new-event-notification', event);
-    });
-    socket.on('disconnect', () => {
-        console.log('User disconnected');
-    });
+  socket.on('new-event', (event) => {
+    io.emit('new-event-notification', event);
+  });
+
+  socket.on('new-dining', (dining) => {
+    io.emit('new-dining-notification', dining);
+  });
 });
 
 
@@ -58,7 +57,7 @@ app.get('/api/signup/:username', async (req, res) => {
           lastName: user.lastName,
           email: user.email,
           username: user.username,
-          password: user.password, 
+          password: user.password, // Note: It's not recommended to send the password to the client
         });
       } else {
         res.status(404).json({ error: 'User not found' });
@@ -87,8 +86,8 @@ app.get('/api/signup/:username', async (req, res) => {
         res.status(404).json({ error: 'User not found' });
       }
     } catch (error) {
-      console.error('Error updating use profile:', error);
-      res.status(500).json({ error: 'Internal Server Erro' });
+      console.error('Error updating user profile:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   });
   
@@ -146,20 +145,22 @@ app.post('/api/events', upload.single('image'), async (req, res) => {
     });
   });
 
-app.post('/api/dinings', upload.single('image'), (req, res) => {
+  app.post('/api/dinings', upload.single('image'), (req, res) => {
     DiningModel.create({
         title: req.body.title,
         description: req.body.description,
         image: req.file.buffer.toString('base64'),
     })
-        .then(newEvent => {
-            console.log('Created new event:', newEvent);
-            res.json(newEvent);
-        })
-        .catch(err => {
-            console.error('Error creating event:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-        });
+    .then(newDining => {
+        // Emit a new dining notification to connected clients
+        io.emit('new-dining-notification', { title: newDining.title });
+        console.log('Created new dining card:', newDining);
+        res.json(newDining);
+    })
+    .catch(err => {
+        console.error('Error creating dining card:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    });
 });
 
 app.get('/api/events', async (req, res) => {
@@ -183,35 +184,39 @@ app.get('/api/dinings', async (req, res) => {
 
 
 app.delete('/api/events/:eventId', async (req, res) => {
-    const { eventId } = req.params;
-    
-    try {
-        const deletedEvent = await EventModel.findByIdAndDelete(eventId);
-        if (deletedEvent) {
-            res.json({ message: 'Event card deleted successfully' });
-        } else {
-            res.status(404).json({ error: 'Event card not found' });
-        }
-    } catch (error) {
-        console.error('Error deleting event card:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+  const { eventId } = req.params;
+
+  try {
+      const deletedEvent = await EventModel.findByIdAndDelete(eventId);
+      if (deletedEvent) {
+          // Emit a delete event notification to connected clients
+          io.emit('delete-event-notification', { eventId });
+          res.json({ message: 'Event card deleted successfully' });
+      } else {
+          res.status(404).json({ error: 'Event card not found' });
+      }
+  } catch (error) {
+      console.error('Error deleting event card:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 app.delete('/api/dinings/:diningId', async (req, res) => {
-    const { diningId } = req.params;
-    
-    try {
-        const deletedDining = await DiningModel.findByIdAndDelete(diningId);
-        if (deletedDining) {
-            res.json({ message: 'Dining card deleted successfully' });
-        } else {
-            res.status(404).json({ error: 'Dining card not found' });
-        }
-    } catch (error) {
-        console.error('Error deleting Dining card:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+  const { diningId } = req.params;
+
+  try {
+      const deletedDining = await DiningModel.findByIdAndDelete(diningId);
+      if (deletedDining) {
+          // Emit a delete dining notification to connected clients
+          io.emit('delete-dining-notification', { diningId });
+          res.json({ message: 'Dining card deleted successfully' });
+      } else {
+          res.status(404).json({ error: 'Dining card not found' });
+      }
+  } catch (error) {
+      console.error('Error deleting Dining card:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 app.post('/api/reservations', (req, res) => {
@@ -321,9 +326,8 @@ app.get('/api/reservations/:idNumber', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+const PORT = process.env.PORT || 3001;
 
-const port = process.env.PORT || 3001; // Use the environment port or default to 3001
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
