@@ -321,8 +321,9 @@ app.get('/api/reservations/:idNumber', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-const PORT = process.env.PORT || 3001;
 
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const port = process.env.PORT || 3001; // Use the environment port or default to 3001
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
