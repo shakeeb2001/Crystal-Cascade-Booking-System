@@ -58,7 +58,7 @@ app.get('/api/signup/:username', async (req, res) => {
           lastName: user.lastName,
           email: user.email,
           username: user.username,
-          password: user.password, // Note: It's not recommended to send the password to the client
+          password: user.password, 
         });
       } else {
         res.status(404).json({ error: 'User not found' });
