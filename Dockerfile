@@ -10,14 +10,10 @@ COPY package*.json ./
 # Install app dependencies
 RUN npm install
 
-# Bundle app source
+# Copy the rest of the application code to the working directory
 COPY . .
 
-# Copy the server.js file from the "Backend/back" directory to the working directory in the container
-COPY Backend/back/server.js .
-
-
-# Expose the port your app runs on
+# Expose the port the app runs on
 EXPOSE 3001
 
 # Command to run your application
