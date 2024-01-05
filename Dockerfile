@@ -13,6 +13,10 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+# Copy the server.js file from the "Backend/back" directory to the working directory in the container
+COPY Backend/back/server.js .
+
+
 # Expose the port your app runs on
 EXPOSE 3001
 
