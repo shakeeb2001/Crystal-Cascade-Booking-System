@@ -7,7 +7,7 @@ services:
     ports:
       - "3001"
     volumes:
-      - ./Backend/back:/usr/src/app
+      - ./backend/back:/usr/src/app
     environment:
       - NODE_ENV=production
 
@@ -18,6 +18,6 @@ services:
     ports:
       - "3000"
     volumes:
-      - ./Frontend/front:/usr/src/app
+      - ./frontend/front:/usr/src/app
     environment:
       - NODE_ENV=production
