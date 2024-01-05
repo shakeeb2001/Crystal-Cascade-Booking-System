@@ -2,22 +2,22 @@ version: '3'
 services:
   backend:
     build:
-      context: ./backend
+      context: ./Backend
       dockerfile: Dockerfile
     ports:
       - "3001"
     volumes:
-      - ./backend:/usr/src/app
+      - ./Backend:/usr/src/app
     environment:
       - NODE_ENV=production
 
   frontend:
     build:
-      context: ./frontend
+      context: ./Brontend
       dockerfile: Dockerfile
     ports:
       - "3000"
     volumes:
-      - ./frontend:/usr/src/app
+      - ./Frontend:/usr/src/app
     environment:
       - NODE_ENV=production
