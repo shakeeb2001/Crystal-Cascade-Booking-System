@@ -63,7 +63,7 @@ app.get('/api/signup/:username', async (req, res) => {
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: 'internal Server Error' });
     }
   });
   
