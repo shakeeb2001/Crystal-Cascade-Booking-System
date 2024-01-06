@@ -16,16 +16,22 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '16'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Build and push Docker image
+    - name: Build and push Docker images
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-        docker build -t shakeeb2001/crystal-cascade-hotel .
-        docker push shakeeb2001/crystal-cascade-hotel
+
+        # Build and push Frontend Docker image
+        docker build -t shakeeb2001/crystal-cascade-frontend ./Frontend/back
+        docker push shakeeb2001/crystal-cascade-frontend
+
+        # Build and push Backend Docker image
+        docker build -t shakeeb2001/crystal-cascade-backend ./Backend/back
+        docker push shakeeb2001/crystal-cascade-backend
