@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: '14'
 
     - name: Install dependencies
       run: npm install
@@ -29,7 +29,7 @@ jobs:
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
         # Build and push Frontend Docker image
-        docker build -t shakeeb2001/crystal-cascade-frontend ./Frontend/back
+        docker build -t shakeeb2001/crystal-cascade-frontend ./Frontend/front
         docker push shakeeb2001/crystal-cascade-frontend
 
         # Build and push Backend Docker image
