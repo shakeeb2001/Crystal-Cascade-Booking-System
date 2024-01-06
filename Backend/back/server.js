@@ -4,15 +4,14 @@ const cors = require('cors');
 const http = require('http');
 const multer = require('multer');
 const socketIO = require('socket.io');
-const SignupModel = require('../back/models/signupmodel');
-const EventModel = require('../back/models/eventcardmodel');
-const DiningModel = require('../back/models/diningcardmodel');
-const BookingModel = require('../back/models/bookinghistrotymodel');
+const SignupModel = require('./models/signupmodel');
+const EventModel = require('./models/eventcardmodel');
+const DiningModel = require('./models//diningcardmodel');
+const BookingModel = require('./models//bookinghistrotymodel');
 
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '20mb' }));
-
 const URI = "mongodb+srv://shakeeb:226284@mycluster.hitx68p.mongodb.net/Cyrstal-Cascade?retryWrites=true&w=majority";
 mongoose.connect(URI);
 const connection = mongoose.connection;
