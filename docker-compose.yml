@@ -1,14 +1,16 @@
 version: "3"
 services:
   react:
-    image: react
+    build:
+      context: ./Frontend/front
     stdin_open: true
-    ports: 
-      - "3000:000"
+    ports:
+      - "3000:3000"
     networks:
       - mern-app
   server:
-    image: server
+    build:
+      context: ./Backend/back
     ports:
       - "3001:3001"
     networks:
