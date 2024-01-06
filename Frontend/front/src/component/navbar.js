@@ -1,4 +1,4 @@
-// Navbar.js
+
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import NavBootstrap from 'react-bootstrap/Nav';
@@ -7,7 +7,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Badge from 'react-bootstrap/Badge';
 import './navbar.css';
 import loginIcon from '../images/newlogo.png';
-import notificationIcon from '../images/notification.png';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import './navbar.css';
 import io from 'socket.io-client'; // Import Socket.IO client library
 
 function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
@@ -15,6 +16,7 @@ function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
   const location = useLocation();
 
   const [notifications, setNotifications] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
     const socket = io('http://localhost:3001', { transports: ['websocket'] });
@@ -66,6 +68,8 @@ function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
   };
 
   const isSignOutPage = location.pathname === '/signout';
+  const notificationCount = notifications.length;
+
 
   return (
     <>
@@ -113,23 +117,45 @@ function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
           </NavBootstrap>
           <NavBootstrap>
           {isLoggedIn && (
-                <NavDropdown className="notification-dropdown" title={<img src={notificationIcon} alt="Notification" />} id="basic-nav-dropdown">
-                   {notifications.length > 0 ? (
-  notifications.map((notification, index) => (
-    <NavDropdown.Item key={index}>
-      {notification.type === 'event' ? (
-        `${notification.data.title} - New Event`
-      ) : (
-        `${notification.data.title} - New Dining`
-      )}
-      <Badge variant="danger">1</Badge>
-    </NavDropdown.Item>
-  ))
-) : (
-  <NavDropdown.Item>No new notifications</NavDropdown.Item>
-)}
-                </NavDropdown>
-                )}
+            <NavDropdown
+              className="notification-dropdown"
+              title={
+                <>
+                  <NotificationsNoneIcon className="notification-icon" />
+                  {notificationCount > 0 && (
+                    <span className="notification-count">{notificationCount}</span>
+                  )}
+                </>
+              }
+              id="basic-nav-dropdown"
+              show={showNotifications}
+              onClick={() => {
+                setShowNotifications(!showNotifications);
+                // Reset count when opening the dropdown
+                setNotifications((prevNotifications) => {
+                  return prevNotifications.map((notification) => ({
+                    ...notification,
+                    count: 0,
+                  }));
+                });
+              }}
+            >
+              {notificationCount > 0 ? (
+                notifications.map((notification, index) => (
+                  <NavDropdown.Item key={index}>
+                    {notification.type === 'event' ? (
+                      `${notification.data.title} - New Event`
+                    ) : (
+                      `${notification.data.title} - New Dining`
+                    )}
+                    <Badge variant="danger">1</Badge>
+                  </NavDropdown.Item>
+                ))
+              ) : (
+                <NavDropdown.Item>No new notifications</NavDropdown.Item>
+              )}
+            </NavDropdown>
+          )}
 
             {isLoggedIn ? (
               <NavDropdown className="profile-dropdown" title={username ? `Hi ${username}` : ''} id="basic-nav-dropdown">
