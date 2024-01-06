@@ -91,7 +91,7 @@ body {
   display: inline-flex;
   margin-top: 50px;
   margin-bottom: 30px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
   position: relative;
   overflow: hidden;
   transition: background-color 0.6s ease;
@@ -113,27 +113,29 @@ body {
   text-align: center;
   width: 100%;
   transform: translateY(50%);
-  transition: transform 0.3s ease, bottom 0.3s ease;
+  transition: transform 0.9s ease;
 }
 
 .card:hover .card-body-event h3 {
   transform: translateY(-50%);
   top: 100px;
-  transition: transform 0.3s ease, bottom 0.3s ease;
 }
 
 .card-body-event h4 {
   opacity: 0;
-  display: none;
   position: absolute;
   color: white;
-  font-size: 18px;
+  font-size: 25px;
   text-align: center;
   width: 80%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: opacity 0.5s ease;
+}
+
+.card:hover .card-body-event h4 {
+  opacity: 1;
 }
 
 @keyframes fadeIn {
@@ -148,8 +150,8 @@ body {
 .event-image-one {
   border-radius: 5px;
   height: 100%;
-  
 }
+
 
 .h1-event {
   padding-top: 20px;
@@ -216,3 +218,6 @@ body {
   color: aqua;
 }
   
+.btn-secondary{
+  border: none;
+}

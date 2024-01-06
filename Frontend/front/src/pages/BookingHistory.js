@@ -25,7 +25,11 @@ export default function BookingHistory() {
         if (response.ok) {
           const data = await response.json();
           console.log('Fetched data:', data);
-          setBookingHistory(data);
+          if (Array.isArray(data)) {
+            setBookingHistory(data);
+          } else {
+            console.error('Fetched data is not an array:', data);
+          }
         } else {
           console.error('Failed to fetch booking history');
         }
@@ -33,7 +37,7 @@ export default function BookingHistory() {
         console.error('Error fetching booking history:', error);
       }
     };
-
+  
     fetchBookingHistory();
   }, []);
 

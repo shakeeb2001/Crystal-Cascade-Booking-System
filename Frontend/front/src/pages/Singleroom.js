@@ -255,7 +255,7 @@ export default function DoubleRoom({ isLoggedIn }) {
               <Button variant="secondary" onClick={handleCloseModal}>
                 No
               </Button>
-              <Button variant="primary" onClick={handleModalYes}>
+              <Button variant="secondary" onClick={handleModalYes}>
                 Yes
               </Button>
             </>

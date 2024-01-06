@@ -18,10 +18,12 @@ const connection = mongoose.connection;
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
 const server = http.createServer(app);
 const io = socketIO(server, { origins: "*" });
 
 io.on('connection', (socket) => {
+
   socket.on('new-event', (event) => {
     io.emit('new-event-notification', event);
   });
@@ -32,16 +34,36 @@ io.on('connection', (socket) => {
 });
 
 
-app.post('/hellow', (req, res) => {
-   res.json('hello')
+app.post('/signup', async (req, res) => {
+  const { username, firstName, lastName, email, password } = req.body;
+
+  try {
+      // Check if the username already exists
+      const existingUser = await SignupModel.findOne({ username });
+
+      if (existingUser) {
+          // Username already exists, send an alert
+          res.status(400).json({ error: 'Username already exists. Please choose another one.' });
+      } else {
+          // Create a new user if the username is not taken
+          const newUser = await SignupModel.create({
+              username,
+              firstName,
+              lastName,
+              email,
+              password,
+          });
+
+          res.status(201).json({ message: 'User added successfully', user: newUser });
+
+          // You can also emit a notification to clients or perform other actions here
+      }
+  } catch (error) {
+      console.error('Error creating user:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-
-app.post('/signup', (req, res) => {
-    SignupModel.create(req.body)
-        .then(newUser => res.json(newUser))
-        .catch(err => res.json(err));
-});
 
 app.get('/api/signup/:username', async (req, res) => {
     const { username } = req.params;
@@ -108,22 +130,28 @@ app.get('/api/signup/:username', async (req, res) => {
   });
   
 
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    SignupModel.findOne(req.body)
+  app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    SignupModel.findOne({ username })
         .then(user => {
             if (user) {
                 if (user.password === password) {
                     res.json('success');
                 } else {
-                    res.json('Incorrect Password..');
+                    res.json('Incorrect Username or Password');
                 }
             } else {
-                res.json('No Record Existing..');
+                if (!user) {
+                    res.json('User not found');
+                } else {
+                    res.json('Incorrect Username or Password');
+                }
             }
         })
         .catch(err => res.json(err));
 });
+
 
 app.post('/api/events', upload.single('image'), async (req, res) => {
     EventModel.create({
@@ -237,7 +265,7 @@ app.post('/api/reservations', (req, res) => {
     })
     .then(newReservation => {
         console.log('Reservation created:', newReservation);
-        res.json(newReservation);
+        res.json({message: 'Reservation created successfully',newReservation});
     })
     .catch(err => {
         console.error('Error creating reservation:', err);
@@ -284,7 +312,7 @@ app.put('/api/reservations/:reservationId', async (req, res) => {
 
         if (updatedReservation) {
             console.log('Reservation updated:', updatedReservation);
-            res.json(updatedReservation);
+            res.json({message: 'Reservation Updated',updatedReservation});
         } else {
             res.status(404).json({ error: 'Reservation not found' });
         }
@@ -314,16 +342,22 @@ app.delete('/api/reservations/:reservationId', async (req, res) => {
 
 // Find booking by ID number
 app.get('/api/reservations/:idNumber', async (req, res) => {
-    const { idNumber } = req.params;
+  const { idNumber } = req.params;
 
-    try {
-        const bookings = await BookingModel.find({ idNumber });
-        res.json(bookings);
-    } catch (error) {
-        console.error('Error finding reservations:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+  try {
+      const bookings = await BookingModel.find({ idNumber });
+
+      if (bookings.length === 0) {
+          res.status(404).json({ message: 'No records available for the provided ID number' });
+      } else {
+          res.json(bookings);
+      }
+  } catch (error) {
+      console.error('Error finding reservations:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
+
 const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, () => {

@@ -11,7 +11,7 @@ const Event = ({ isAdmin }) => {
   const [cards, setCards] = useState([]);
   const [newCard, setNewCard] = useState({ title: '', description: '', image: null });
 
-  // WebSocket connection for dining card notifications
+  // WebSocket connection for event card notifications
   const socket = io('http://localhost:3001', { transports: ['websocket'] });
 
   useEffect(() => {
@@ -30,19 +30,19 @@ const Event = ({ isAdmin }) => {
       }
     };
 
-    const handleDiningNotification = (dining) => {
-      console.log('New Dining Notification:', dining);
-      // Handle the new dining card notification
+    const handleEventNotification = (event) => {
+      console.log('New Event Notification:', event);
+      // Handle the new event card notification
       // You can update your UI or take any other actions here
-      setCards((prevCards) => [...prevCards, dining]);
+      setCards((prevCards) => [...prevCards, event]);
     };
 
-    socket.on('new-dining-notification', handleDiningNotification);
+    socket.on('new-event-notification', handleEventNotification);
 
     fetchCards();
 
     return () => {
-      socket.off('new-dining-notification', handleDiningNotification);
+      socket.off('new-event-notification', handleEventNotification);
     };
   }, [socket]);
 

@@ -93,12 +93,12 @@ function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
               </NavLink>
             </NavBootstrap.Item>
             <NavBootstrap.Item onClick={handleScrollToEvents}>
-              <NavLink to="/#Container2" className="nav-link" activeClassName="event">
+              <NavLink to="/#Container2" className="nav-link" activeClassName="active" >
                 Events
               </NavLink>
             </NavBootstrap.Item>
             <NavBootstrap.Item onClick={handleScrollToDining}>
-              <NavLink to="/#Container3" className="nav-link" activeClassName="dining">
+              <NavLink to="/#Container3" className="nav-link"  activeClassName="active">
                 Dining
               </NavLink>
             </NavBootstrap.Item>

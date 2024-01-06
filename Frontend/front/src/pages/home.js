@@ -79,7 +79,7 @@ export default function Home() {
               <div className="card-body-event">
                 <h3>Engagement</h3>
                 <h4>Perched on the pristine shores of Mount Lavinia Beach, Hotel Crystel Cascade
-              stands as a beacon of hospitality along the coastline of Colombo.</h4>
+                     stands as a beacon of hospitality along the coastline of Colombo.</h4>
                 <Link to='/event'><img src={EventImageOne} alt="Background" className="event-image-two img-fluid" /></Link>
               </div>
             </div>
@@ -88,6 +88,8 @@ export default function Home() {
             <div className="card">
               <div className="card-body-event">
                 <h3>Wedding</h3>
+                <h4>Perched on the pristine shores of Mount Lavinia Beach, Hotel Crystel Cascade
+                     stands as a beacon of hospitality along the coastline of Colombo.</h4>
                 <Link to='/event'><img src={EventImageTwo} alt="Background" className="event-image-one img-fluid" /></Link>
               </div>
             </div>
@@ -96,6 +98,8 @@ export default function Home() {
             <div className="card">
               <div className="card-body-event">
                 <h3>Meetings</h3>
+                <h4>Perched on the pristine shores of Mount Lavinia Beach, Hotel Crystel Cascade
+                     stands as a beacon of hospitality along the coastline of Colombo.</h4>
                 <Link to='/event'><img src={EventImageThree} alt="Background" className="event-image-one img-fluid" /></Link>
               </div>
             </div>
