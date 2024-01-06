@@ -1,14 +1,14 @@
 version: "3"
 services:
   react:
-    image: react
+    image: crystal-cascade-frontend
     stdin_open: true
     ports: 
-      - "3000:000"
+      - "3000:3000"
     networks:
       - mern-app
   server:
-    image: server
+    image: crystal-cascade-backend
     ports:
       - "3001:3001"
     networks:
