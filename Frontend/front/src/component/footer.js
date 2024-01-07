@@ -32,7 +32,7 @@ export default function App() {
     </div>
     <div>
       <i class="fa fa-phone"></i>
-      <p> (+94) 1127 434 808</p>
+      <p> (+94) 1127 434 809</p>
     </div>
     <div>
       <i class="fa fa-envelope"></i>
