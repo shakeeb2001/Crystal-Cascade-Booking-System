@@ -57,7 +57,7 @@ export default function BookingHistory() {
       console.error('Error deleting reservation:', error);
     }
 
-    setHighlightedId(null); // Clear highlighted row after deletion
+    setHighlightedId(null); 
   };
 
   const handleEdit = (reservationId) => {
