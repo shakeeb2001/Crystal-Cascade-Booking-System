@@ -36,7 +36,6 @@ function App() {
     setIsAdmin(admin);
     setUsername(username);
 
-    // Save the login status in local storage
     localStorage.setItem('isLoggedIn', JSON.stringify(status));
     localStorage.setItem('isAdmin', JSON.stringify(admin));
     localStorage.setItem('username', username);
