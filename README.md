@@ -1,6 +1,6 @@
 # Crystal-Cascade-Booking-System
 
-![logo_cropped](https://github.com/shakeeb2001/Crystal-Cascade-Booking-System/blob/main/Frontend/front/src/images/logonew.png)
+(https://github.com/shakeeb2001/Crystal-Cascade-Booking-System/blob/main/Frontend/front/src/images/logonew.png)
 
 ### About the application
 
