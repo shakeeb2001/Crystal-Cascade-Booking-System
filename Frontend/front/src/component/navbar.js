@@ -9,7 +9,7 @@ import './navbar.css';
 import loginIcon from '../images/newlogo.png';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import './navbar.css';
-import io from 'socket.io-client'; // Import Socket.IO client library
+import io from 'socket.io-client'; 
 
 function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
   const navigate = useNavigate();
