@@ -41,7 +41,7 @@ app.post('/signup', async (req, res) => {
     const existingUser = await SignupModel.findOne({ username });
 
     if (existingUser) {
-      res.status(409).json({ error: 'Username already exists.' });
+      res.status(409).json({ error: 'Username already exist.' });
     } else {
       const newUser = await SignupModel.create({
         username,
