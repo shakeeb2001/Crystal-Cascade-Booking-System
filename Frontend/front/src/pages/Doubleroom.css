@@ -4,7 +4,7 @@
   align-items: center;
   height: 100vh;
   overflow: hidden;
-  position: relative; /* Add position relative to set a positioning context for absolute children */
+  position: relative; 
 }
 
 .room-info-container {
