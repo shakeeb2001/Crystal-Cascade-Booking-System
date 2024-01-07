@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Link } from 'react-router-dom'; // Step 1
+import { Link } from 'react-router-dom'; 
 import RoomBackgroundVideo from '../images/roomtype.mp4';
 import './RoomType.css';
 import img1 from '../images/img1.png';
