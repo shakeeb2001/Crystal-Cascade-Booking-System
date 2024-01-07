@@ -68,7 +68,7 @@
 }
 
  .nav-link-sign .active {
-  color: #ffffff !important; /* Set the active link color to white with !important */
+  color: #ffffff !important; 
   background-color: transparent !important;
 }
 
