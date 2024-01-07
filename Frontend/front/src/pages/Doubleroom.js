@@ -74,7 +74,7 @@ export default function DoubleRoom({ isLoggedIn }) {
             phoneNumber: '',
             checkIn: '',
             checkOut: '',
-            roomType: 'Delux Room',
+            roomType: 'Double Room',
           });
 
           setShowModal(false);
@@ -95,7 +95,7 @@ export default function DoubleRoom({ isLoggedIn }) {
       phoneNumber: '',
       checkIn: '',
       checkOut: '',
-      roomType: 'Delux Room'
+      roomType: 'Double Room'
     });
 
     setShowModal(false);
