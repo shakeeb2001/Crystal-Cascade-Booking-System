@@ -62,7 +62,6 @@
   text-decoration: none;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .Card-container {
       flex-direction: column;
