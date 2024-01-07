@@ -49,7 +49,7 @@
   
 .text-right 
 {
-  margin-left: 32%;
+  margin-left: 40%;
 }
 
 .text-right .btn-primary 
@@ -61,5 +61,13 @@
 }
 .mr-4{
   border: none;
+  width: 150px;
 }
 
+.profile-form{
+  width: 70%;
+  margin-left: 500px;
+}
+.profile-button{
+  margin-left: 50px;
+}

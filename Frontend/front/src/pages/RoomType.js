@@ -13,7 +13,7 @@ export default function RoomTypes() {
   const roomTypes = [
     {
       title: 'Single Room',
-      description: 'No of Guest: One | $100 Per Night',
+      description: 'No of Guest: 1 | $100 Per Night',
       image: img1,
       route: '/singleroom', // Step 2
     },
@@ -25,7 +25,7 @@ export default function RoomTypes() {
     },
     {
       title: 'Deluxe Single Room',
-      description: 'No of Guests: 1 | $150 Per Night.',
+      description: 'No of Guests: 1-2 | $150 Per Night.',
       image: img3,
       route: '/deluxroom', // Step 2
     },

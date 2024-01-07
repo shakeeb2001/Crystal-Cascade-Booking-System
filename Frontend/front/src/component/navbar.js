@@ -93,12 +93,12 @@ function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
               </NavLink>
             </NavBootstrap.Item>
             <NavBootstrap.Item onClick={handleScrollToEvents}>
-              <NavLink to="/#Container2" className="nav-link" activeClassName="active" >
+              <NavLink to="/event" className="nav-link" activeClassName="active" >
                 Events
               </NavLink>
             </NavBootstrap.Item>
             <NavBootstrap.Item onClick={handleScrollToDining}>
-              <NavLink to="/#Container3" className="nav-link"  activeClassName="active">
+              <NavLink to="/Dining" className="nav-link"  activeClassName="active">
                 Dining
               </NavLink>
             </NavBootstrap.Item>
@@ -110,7 +110,7 @@ function Navbar({ isLoggedIn, updateLoginStatus, isAdmin, username }) {
               </NavBootstrap.Item>
             )}
             <NavBootstrap.Item>
-              <NavLink to="/#" className="nav-link" onClick={handleScrollToAboutus} activeClassName="active">
+              <NavLink  className="nav-link" onClick={handleScrollToAboutus} >
                 About Us
               </NavLink>
             </NavBootstrap.Item>

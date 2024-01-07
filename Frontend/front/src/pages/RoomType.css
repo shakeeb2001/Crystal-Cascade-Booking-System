@@ -41,6 +41,7 @@
   align-items: center;
   min-height: 80vh;
   background-color: rgba(146, 146, 146, 0.7);
+  border: none;
 }
 
 .card {
@@ -48,6 +49,7 @@
   transition: transform 0.3s ease-in-out;
   width: 400px;
   height: 350px;
+  border: none;
   color: rgb(2, 31, 43);
 }
 
