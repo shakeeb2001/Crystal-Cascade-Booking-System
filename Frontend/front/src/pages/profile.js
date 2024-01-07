@@ -43,7 +43,6 @@ const Profile = ({ user, onUpdateProfile, onDeleteProfile }) => {
       .put(`http://localhost:3001/api/signup/${user}`, userData)
       .then((response) => {
         console.log('Profile updated successfully:', response.data);
-        onUpdateProfile(response.data);
         setIsFormEdited(false);
         setIsEditMode(false);
         setShowModal(true); // Show the modal after profile update
@@ -52,7 +51,6 @@ const Profile = ({ user, onUpdateProfile, onDeleteProfile }) => {
         console.error('Error updating profile:', error);
       });
   };
-  
 
   const handleDeleteProfile = () => {
     axios
@@ -67,10 +65,9 @@ const Profile = ({ user, onUpdateProfile, onDeleteProfile }) => {
   };
 
   const handleCloseModal = () => {
-  setShowModal(false);
-  // Perform any other cleanup or actions needed after closing the modal
-};
-
+    setShowModal(false);
+    // Perform any other cleanup or actions needed after closing the modal
+  };
 
   return (
     <div className="profile-wrapper" id="profile">
@@ -162,7 +159,7 @@ const Profile = ({ user, onUpdateProfile, onDeleteProfile }) => {
       </Row>
       <Row>
         <Col className="text-right">
-          <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center">
             {!isEditMode && (
               <Button className="mr-4" onClick={() => setIsEditMode(true)}>
                 Edit
@@ -179,6 +176,7 @@ const Profile = ({ user, onUpdateProfile, onDeleteProfile }) => {
           </div>
         </Col>
       </Row>
+
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>Profile Updated</Modal.Title>
@@ -190,7 +188,6 @@ const Profile = ({ user, onUpdateProfile, onDeleteProfile }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    
     </div>
   );
 };

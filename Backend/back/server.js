@@ -38,29 +38,24 @@ app.post('/signup', async (req, res) => {
   const { username, firstName, lastName, email, password } = req.body;
 
   try {
-      // Check if the username already exists
-      const existingUser = await SignupModel.findOne({ username });
+    const existingUser = await SignupModel.findOne({ username });
 
-      if (existingUser) {
-          // Username already exists, send an alert
-          res.status(400).json({ error: 'Username already exists. Please choose another one.' });
-      } else {
-          // Create a new user if the username is not taken
-          const newUser = await SignupModel.create({
-              username,
-              firstName,
-              lastName,
-              email,
-              password,
-          });
+    if (existingUser) {
+      res.status(409).json({ error: 'Username already exists.' });
+    } else {
+      const newUser = await SignupModel.create({
+        username,
+        firstName,
+        lastName,
+        email,
+        password,
+      });
 
-          res.status(201).json({ message: 'User added successfully', user: newUser });
-
-          // You can also emit a notification to clients or perform other actions here
-      }
+      res.status(201).json({ message: 'User added successfully', user: newUser });
+    }
   } catch (error) {
-      console.error('Error creating user:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Error creating user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
