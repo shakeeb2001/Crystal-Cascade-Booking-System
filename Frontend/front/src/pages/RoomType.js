@@ -15,19 +15,19 @@ export default function RoomTypes() {
       title: 'Single Room',
       description: 'No of Guest: 1 | $100 Per Night',
       image: img1,
-      route: '/singleroom', // Step 2
+      route: '/singleroom', 
     },
     {
       title: 'Double Room',
       description: 'No of Guests: 2-3 | $200 Per Night.',
       image: img2,
-      route: '/doubleroom', // Step 2
+      route: '/doubleroom', 
     },
     {
       title: 'Deluxe Single Room',
       description: 'No of Guests: 1-2 | $150 Per Night.',
       image: img3,
-      route: '/deluxroom', // Step 2
+      route: '/deluxroom', 
     },
   ];
 
@@ -42,7 +42,6 @@ export default function RoomTypes() {
           <Row xs={20} md={10} className="g-4">
             {roomTypes.map((room, idx) => (
               <Col key={idx}>
-                {/* Step 2 */}
                 <Link to={room.route} className="card-link" id='room-card-link'>
                   <Card className="card roomcard">
                     <Card.Img variant="top" src={room.image} />
