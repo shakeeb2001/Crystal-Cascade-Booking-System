@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './login.css';
 import axios from 'axios';
-import { Form, Alert, Modal, Spinner } from 'react-bootstrap';  // Import Modal and Spinner
+import { Form, Alert, Modal, Spinner } from 'react-bootstrap';  
 import loginIcon from '../images/newlogo.png';
 import Background from '../images/background.png';
 
