@@ -245,7 +245,7 @@ export default function DoubleRoom({ isLoggedIn }) {
             <p>Do you want to reserve?</p>
           ) : (
             <div className={`reservation-status text-center ${reservationStatus}`}>
-              <p className="model-class">Reserved successfully!</p>
+              <p className="model-class">Reserve successfully!</p>
             </div>
           )}
         </Modal.Body>
